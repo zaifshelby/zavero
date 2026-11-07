@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZAVERO — Digital Talent. Managed.</title>
+<meta name="description" content="ZAVERO connects businesses with the right digital specialists and manages projects from idea to delivery." />
+
+<meta property="og:title" content="ZAVERO — Digital Talent. Managed." />
+<meta property="og:description" content="ZAVERO connects businesses with the right digital specialists and manages projects from idea to delivery." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A0A0B'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial' fill='%238B5CF6' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0A0A0B;
+    --bg-raised: #0F0F11;
+    --surface: #131316;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --text: #F2F2F0;
+    --text-muted: #98989E;
+    --text-faint: #616166;
+    --accent: #8B5CF6;
+    --accent-soft: #A78BFA;
+    --accent-dim: rgba(139,92,246,0.14);
+    --max-w: 1280px;
+    --pad: clamp(20px, 5vw, 64px);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope', system-ui, sans-serif;
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  img,svg{ display:block; max-width:100%; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  ul{ list-style:none; }
+
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+
+  .wrap{ max-width:var(--max-w); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad); }
+
+  ::selection{ background:var(--accent); color:#fff; }
+
+  :focus-visible{
+    outline:2px solid var(--accent-soft);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .eyebrow{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent-soft);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px;
+    height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  /* ---------- Background texture ---------- */
+  .bg-field{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(80% 55% at 82% -8%, rgba(139,92,246,0.16), transparent 60%),
+      radial-gradient(50% 40% at 8% 8%, rgba(139,92,246,0.06), transparent 65%),
+      var(--bg);
+  }
+  .bg-field::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding:22px 0;
+    transition:background 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(10,10,11,0.72);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom-color:var(--border);
+    padding:14px 0;
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .logo{
+    font-size:19px;
+    font-weight:800;
+    letter-spacing:0.02em;
+  }
+  .logo span{ color:var(--accent-soft); }
+
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+    font-weight:500;
+    color:var(--text-muted);
+  }
+  .nav-links a{ position:relative; padding:4px 0; transition:color 0.25s var(--ease); }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--accent-soft);
+    transition:width 0.3s var(--ease);
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    font-weight:600;
+    padding:10px 20px;
+    border:1px solid var(--border-strong);
+    border-radius:8px;
+    transition:border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.3s var(--ease);
+    white-space:nowrap;
+  }
+  .nav-cta:hover{
+    border-color:var(--accent);
+    background:var(--accent-dim);
+    transform:translateY(-1px);
+  }
+
+  .nav-burger{
+    display:none;
+    width:36px; height:36px;
+    align-items:center;
+    justify-content:center;
+  }
+  .nav-burger span, .nav-burger span::before, .nav-burger span::after{
+    content:"";
+    display:block;
+    width:20px; height:1.5px;
+    background:var(--text);
+    position:relative;
+    transition:transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .nav-burger span::before{ position:absolute; top:-6px; }
+  .nav-burger span::after{ position:absolute; top:6px; }
+  .nav-burger.open span{ background:transparent; }
+  .nav-burger.open span::before{ top:0; transform:rotate(45deg); }
+  .nav-burger.open span::after{ top:0; transform:rotate(-45deg); }
+
+  .mobile-menu{
+    position:fixed;
+    top:0; right:0;
+    height:100vh;
+    width:min(78vw, 340px);
+    background:var(--bg-raised);
+    border-left:1px solid var(--border);
+    z-index:99;
+    padding:100px 32px 40px;
+    transform:translateX(100%);
+    transition:transform 0.45s var(--ease);
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  .mobile-menu.open{ transform:translateX(0); }
+  .mobile-menu a{ font-size:20px; font-weight:600; }
+  .mobile-menu .nav-cta{ margin-top:12px; text-align:center; justify-content:center; }
+
+  .scrim{
+    position:fixed; inset:0; background:rgba(0,0,0,0.5);
+    z-index:98; opacity:0; pointer-events:none; transition:opacity 0.4s var(--ease);
+  }
+  .scrim.open{ opacity:1; pointer-events:auto; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:calc(120px + 5vw) 0 96px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:48px;
+    align-items:center;
+    min-height:92vh;
+  }
+  .hero-copy .eyebrow{ margin-bottom:22px; }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4.1rem);
+    font-weight:800;
+    line-height:1.06;
+    letter-spacing:-0.02em;
+    max-width:15ch;
+  }
+  .hero p.lede{
+    margin-top:24px;
+    font-size:clamp(1.02rem, 1.4vw, 1.2rem);
+    color:var(--text-muted);
+    max-width:46ch;
+    line-height:1.65;
+  }
+  .hero-ctas{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    margin-top:38px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--text);
+    color:#0A0A0B;
+    font-weight:700;
+    font-size:15px;
+    padding:15px 26px;
+    border-radius:8px;
+    transition:transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 34px -12px rgba(139,92,246,0.55);
+    background:#fff;
+  }
+  .btn-primary .arrow{ transition:transform 0.3s var(--ease); }
+  .btn-primary:hover .arrow{ transform:translateX(4px); }
+
+  .btn-ghost{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:15px;
+    font-weight:600;
+    color:var(--text-muted);
+    transition:color 0.3s var(--ease);
+  }
+  .btn-ghost:hover{ color:var(--text); }
+  .btn-ghost .arrow-down{ transition:transform 0.3s var(--ease); }
+  .btn-ghost:hover .arrow-down{ transform:translateY(3px); }
+
+  .hero-position-line{
+    margin-top:46px;
+    font-size:13px;
+    color:var(--text-faint);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-position-line::before{
+    content:"";
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    flex-shrink:0;
+  }
+
+  .hero-visual{ position:relative; height:460px; }
+
+  /* ---------- Marquee ---------- */
+  .marquee-strip{
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .marquee-track{
+    display:flex;
+    gap:0;
+    width:max-content;
+    animation:scroll-x 34s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .marquee-track{ animation:none; } }
+  .marquee-track span{
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    padding:0 28px;
+    white-space:nowrap;
+    border-right:1px solid var(--border);
+  }
+  @keyframes scroll-x{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ---------- Sections generic ---------- */
+  section{ position:relative; padding:120px 0; }
+  .section-head{ max-width:640px; margin-bottom:64px; }
+  .section-head h2{
+    margin-top:18px;
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+    font-weight:800;
+    letter-spacing:-0.015em;
+    line-height:1.15;
+  }
+  .section-head p{
+    margin-top:18px;
+    color:var(--text-muted);
+    font-size:1.02rem;
+    max-width:52ch;
+    line-height:1.65;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Problem section ---------- */
+  .problem{ padding-top:60px; }
+  .problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .problem-copy p{
+    color:var(--text-muted);
+    font-size:1.05rem;
+    line-height:1.75;
+    max-width:48ch;
+  }
+  .problem-copy p + p{ margin-top:20px; }
+
+  .flow-compare{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .flow-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 22px;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+  }
+  .flow-row:last-child{ border-bottom:none; }
+  .flow-before .flow-row{ color:var(--text-faint); }
+  .flow-before .flow-row span:last-child{ font-size:12px; color:var(--text-faint); }
+  .flow-divider{
+    text-align:center;
+    padding:14px;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-soft);
+    background:var(--accent-dim);
+    border-bottom:1px solid var(--border);
+    border-top:1px solid var(--border);
+  }
+  .flow-after .flow-row{ color:var(--text); font-weight:600; }
+  .flow-after .flow-row span:last-child{
+    color:var(--accent-soft);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  /* ---------- Services ---------- */
+  .service-list{ border-top:1px solid var(--border); }
+  .service-row{
+    display:grid;
+    grid-template-columns:64px 1fr auto;
+    align-items:center;
+    gap:28px;
+    padding:30px 0;
+    border-bottom:1px solid var(--border);
+    cursor:default;
+    transition:padding-left 0.4s var(--ease), background 0.4s var(--ease);
+  }
+  .service-row:hover{
+    padding-left:14px;
+    background:linear-gradient(90deg, var(--accent-dim), transparent 60%);
+  }
+  .service-num{
+    font-size:14px;
+    font-weight:700;
+    color:var(--text-faint);
+    transition:color 0.4s var(--ease);
+  }
+  .service-row:hover .service-num{ color:var(--accent-soft); }
+  .service-main h3{
+    font-size:clamp(1.15rem, 2vw, 1.55rem);
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .service-main p{
+    margin-top:8px;
+    color:var(--text-muted);
+    font-size:0.95rem;
+    max-width:56ch;
+    line-height:1.6;
+  }
+  .service-arrow{
+    font-size:20px;
+    color:var(--text-faint);
+    transition:transform 0.4s var(--ease), color 0.4s var(--ease);
+  }
+  .service-row:hover .service-arrow{ transform:translateX(6px); color:var(--accent-soft); }
+
+  /* ---------- Differentiator ---------- */
+  .diff{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .diff-copy .highlight{
+    margin-top:26px;
+    font-size:15px;
+    font-weight:600;
+    color:var(--text);
+    padding-left:16px;
+    border-left:2px solid var(--accent);
+  }
+  .diff-diagram{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+  }
+  .diff-node{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 24px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    background:var(--surface);
+    text-align:center;
+  }
+  .diff-node.center{
+    color:var(--text);
+    border-color:var(--border-strong);
+    background:var(--accent-dim);
+  }
+  .diff-connector{
+    height:34px;
+    width:1px;
+    background:linear-gradient(var(--border-strong), var(--border));
+    margin:0 auto;
+    position:relative;
+  }
+  .diff-connector::after{
+    content:"";
+    position:absolute;
+    left:50%; bottom:0;
+    transform:translateX(-50%);
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--accent-soft);
+  }
+
+  /* ---------- Process (management steps) ---------- */
+  .mgmt-steps{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .mgmt-step{
+    background:var(--bg);
+    padding:32px 26px;
+  }
+  .mgmt-step .step-num{
+    font-size:12px;
+    font-weight:700;
+    color:var(--accent-soft);
+    letter-spacing:0.08em;
+  }
+  .mgmt-step h4{
+    margin-top:14px;
+    font-size:1.05rem;
+    font-weight:700;
+  }
+  .mgmt-step p{
+    margin-top:10px;
+    font-size:0.9rem;
+    color:var(--text-muted);
+    line-height:1.6;
+  }
+
+  /* ---------- How it works timeline ---------- */
+  .timeline{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    top:11px; left:0; right:0;
+    height:1px;
+    background:var(--border);
+  }
+  .timeline-fill{
+    position:absolute;
+    top:11px; left:0;
+    height:1px;
+    background:var(--accent);
+    width:0;
+    transition:width 1.4s var(--ease);
+  }
+  .timeline-step{
+    position:relative;
+    flex:1;
+    min-width:0;
+    padding-top:36px;
+  }
+  .timeline-dot{
+    position:absolute;
+    top:0; left:0;
+    width:23px; height:23px;
+    border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--border-strong);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    font-weight:700;
+    color:var(--text-faint);
+    transition:border-color 0.5s var(--ease), color 0.5s var(--ease), background 0.5s var(--ease);
+  }
+  .timeline-step.active .timeline-dot{
+    border-color:var(--accent);
+    background:var(--accent);
+    color:#0A0A0B;
+  }
+  .timeline-step h4{ font-size:0.98rem; font-weight:700; padding-right:12px; }
+  .timeline-step p{ margin-top:8px; font-size:0.86rem; color:var(--text-muted); line-height:1.55; padding-right:16px; }
+
+  @media (max-width: 860px){
+    .timeline{ flex-direction:column; gap:0; }
+    .timeline::before{ top:0; bottom:0; left:11px; right:auto; width:1px; height:auto; }
+    .timeline-fill{ top:0; left:11px; width:1px; height:0; }
+    .timeline-step{ padding-top:0; padding-left:40px; padding-bottom:36px; }
+    .timeline-step:last-child{ padding-bottom:0; }
+    .timeline-dot{ top:-2px; }
+  }
+
+  /* ---------- Why Zavero ---------- */
+  .benefits-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .benefit{
+    background:var(--bg);
+    padding:34px 28px;
+    transition:background 0.4s var(--ease);
+  }
+  .benefit:hover{ background:var(--bg-raised); }
+  .benefit h4{ font-size:1.02rem; font-weight:700; }
+  .benefit p{ margin-top:10px; font-size:0.9rem; color:var(--text-muted); line-height:1.6; }
+
+  /* ---------- Who we work with ---------- */
+  .audience-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  .audience-card{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:28px 22px;
+    transition:border-color 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .audience-card:hover{ border-color:var(--border-strong); transform:translateY(-4px); }
+  .audience-card h4{ font-size:1rem; font-weight:700; letter-spacing:0.01em; }
+  .audience-card p{ margin-top:10px; font-size:0.88rem; color:var(--text-muted); line-height:1.55; }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .about-copy p{ color:var(--text-muted); font-size:1.02rem; line-height:1.75; }
+  .about-copy p + p{ margin-top:18px; }
+  .about-mark{
+    font-size:clamp(1.4rem, 3.4vw, 2.2rem);
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.3;
+    color:var(--text);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:14px 18px;
+  }
+  .about-mark .sep{ color:var(--accent-soft); font-weight:400; }
+  .about-note{
+    margin-top:30px;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    position:relative;
+    padding:140px 0;
+    text-align:center;
+    border-top:1px solid var(--border);
+  }
+  .final-cta::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(55% 60% at 50% 0%, rgba(139,92,246,0.14), transparent 70%);
+    pointer-events:none;
+  }
+  .final-cta .eyebrow{ justify-content:center; }
+  .final-cta .eyebrow::before{ display:none; }
+  .final-cta h2{
+    margin-top:22px;
+    font-size:clamp(2.1rem, 5vw, 3.6rem);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    max-width:16ch;
+    margin-left:auto; margin-right:auto;
+  }
+  .final-cta p{
+    margin-top:20px;
+    color:var(--text-muted);
+    max-width:48ch;
+    margin-left:auto; margin-right:auto;
+    font-size:1.05rem;
+    line-height:1.65;
+  }
+  .final-cta .btn-primary{ margin-top:38px; padding:17px 32px; font-size:16px; }
+  .final-cta .sub{ margin-top:20px; font-size:13px; color:var(--text-faint); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--border);
+    padding:80px 0 32px;
+  }
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:56px;
+  }
+  .footer-brand .logo{ font-size:22px; }
+  .footer-tagline{ margin-top:14px; font-size:14px; color:var(--accent-soft); font-weight:600; }
+  .footer-desc{ margin-top:16px; font-size:0.92rem; color:var(--text-muted); max-width:34ch; line-height:1.6; }
+  .footer-col h5{
+    font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--text-faint); margin-bottom:18px;
+  }
+  .footer-col ul{ display:flex; flex-direction:column; gap:12px; }
+  .footer-col a{ font-size:0.92rem; color:var(--text-muted); transition:color 0.25s var(--ease); }
+  .footer-col a:hover{ color:var(--text); }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:28px;
+    border-top:1px solid var(--border);
+    font-size:12.5px;
+    color:var(--text-faint);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  /* ---------- Custom cursor (desktop only) ---------- */
+  .cursor-dot{
+    position:fixed;
+    top:0; left:0;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--accent-soft);
+    pointer-events:none;
+    z-index:999;
+    transform:translate(-50%,-50%);
+    transition:width 0.25s var(--ease), height 0.25s var(--ease), opacity 0.25s var(--ease);
+    opacity:0;
+  }
+  .cursor-dot.hover{ width:34px; height:34px; background:transparent; border:1px solid var(--accent-soft); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px){
+    .hero{ grid-template-columns:1fr; }
+    .hero-visual{ height:340px; order:-1; }
+    .problem-grid, .diff, .about-grid{ grid-template-columns:1fr; gap:40px; }
+    .mgmt-steps{ grid-template-columns:1fr 1fr; }
+    .benefits-grid{ grid-template-columns:1fr 1fr; }
+    .audience-grid{ grid-template-columns:1fr 1fr; }
+    .footer-top{ grid-template-columns:1fr 1fr; }
+    .cursor-dot{ display:none; }
+  }
+
+  @media (max-width: 640px){
+    .nav-links{ display:none; }
+    .nav-cta{ display:none; }
+    .nav-burger{ display:flex; }
+    section{ padding:80px 0; }
+    .hero{ padding-top:110px; min-height:auto; }
+    .service-row{ grid-template-columns:40px 1fr; row-gap:10px; }
+    .service-arrow{ display:none; }
+    .mgmt-steps{ grid-template-columns:1fr; }
+    .benefits-grid{ grid-template-columns:1fr; }
+    .audience-grid{ grid-template-columns:1fr; }
+    .footer-top{ grid-template-columns:1fr; gap:36px; }
+    .final-cta{ padding:100px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-field" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<header id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="#home" class="logo">ZAVERO</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Start a Project <span aria-hidden="true">→</span></a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#process">Process</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="nav-cta">Start a Project →</a>
+</nav>
+
+<main id="home">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Digital talent, on demand</p>
+      <h1>The right team for your next digital project.</h1>
+      <p class="lede">From websites and apps to design and digital growth, ZAVERO connects businesses with the right specialists and manages the work from start to finish.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Start a Conversation <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="#how-it-works" class="btn-ghost">How It Works <span class="arrow-down" aria-hidden="true">↓</span></a>
+      </div>
+      <p class="hero-position-line">One agency. A network of specialists. One point of contact.</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 480 460" width="100%" height="100%" style="overflow:visible">
+        <defs>
+          <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g id="networkLines" stroke="#2A2A2E" stroke-width="1" fill="none"></g>
+        <g id="networkNodes"></g>
+        <circle cx="240" cy="230" r="46" fill="url(#nodeGlow)"/>
+        <circle cx="240" cy="230" r="30" fill="#131316" stroke="#8B5CF6" stroke-width="1.2"/>
+        <text x="240" y="235" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" font-weight="800" fill="#F2F2F0">ZAVERO</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee-strip">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Built for Founders</span><span>Startups</span><span>E-Commerce</span><span>Growing Businesses</span>
+      <span>Built for Founders</span><span>Startups</span><span>E-Commerce</span><span>Growing Businesses</span>
+    </div>
+  </div>
+
+  <!-- ================= PROBLEM ================= -->
+  <section class="problem wrap">
+    <div class="problem-grid">
+      <div class="problem-copy reveal">
+        <p class="eyebrow">The problem</p>
+        <h2 style="margin-top:18px; font-size:clamp(1.8rem,3.2vw,2.4rem); font-weight:800; letter-spacing:-0.015em; line-height:1.15;">Great projects need the right people.</h2>
+        <p style="margin-top:24px;">Finding reliable digital talent shouldn't mean spending weeks searching, comparing portfolios, negotiating with multiple people, and trying to manage the entire project yourself.</p>
+        <p>ZAVERO simplifies the process by bringing the right specialists together around your project — while we handle the coordination, communication, and execution.</p>
+      </div>
+      <div class="reveal">
+        <div class="flow-compare">
+          <div class="flow-before">
+            <div class="flow-row"><span>Search</span><span>Weeks lost</span></div>
+            <div class="flow-row"><span>Compare</span><span>No clear signal</span></div>
+            <div class="flow-row"><span>Message</span><span>Scattered threads</span></div>
+            <div class="flow-row"><span>Manage</span><span>On you</span></div>
+            <div class="flow-row"><span>Revise</span><span>Back and forth</span></div>
+          </div>
+          <div class="flow-divider">With ZAVERO</div>
+          <div class="flow-after">
+            <div class="flow-row"><span>Match</span><span>Right fit</span></div>
+            <div class="flow-row"><span>Manage</span><span>Handled for you</span></div>
+            <div class="flow-row"><span>Deliver</span><span>One outcome</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">What we do</p>
+      <h2>One agency. A network of specialists.</h2>
+      <p>Whatever you're building, we bring together the expertise needed to move it forward.</p>
+    </div>
+    <div class="service-list reveal">
+      <div class="service-row">
+        <span class="service-num">01</span>
+        <div class="service-main">
+          <h3>Web Development</h3>
+          <p>Websites, landing pages, custom platforms, and digital experiences built around your business goals.</p>
+        </div>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">02</span>
+        <div class="service-main">
+          <h3>UI/UX Design</h3>
+          <p>Clean, intuitive interfaces and thoughtful digital experiences designed around real users and business objectives.</p>
+        </div>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">03</span>
+        <div class="service-main">
+          <h3>Graphic Design</h3>
+          <p>Social creatives, marketing assets, and digital design that make businesses look credible.</p>
+        </div>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">04</span>
+        <div class="service-main">
+          <h3>Mobile Development</h3>
+          <p>Modern mobile experiences for iOS, Android, and cross-platform applications.</p>
+        </div>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">05</span>
+        <div class="service-main">
+          <h3>Video Editing</h3>
+          <p>Polished video editing for product, social, and marketing content.</p>
+        </div>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">06</span>
+        <div class="service-main">
+          <h3>Digital Marketing</h3>
+          <p>Content, social media, SEO, and digital growth strategies designed to help businesses reach the right audience.</p>
+        </div>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CORE DIFFERENTIATOR ================= -->
+  <section class="wrap">
+    <div class="diff">
+      <div class="diff-copy reveal">
+        <p class="eyebrow">Beyond the freelancer model</p>
+        <h2 style="margin-top:18px; font-size:clamp(1.8rem,3.2vw,2.4rem); font-weight:800; letter-spacing:-0.015em; line-height:1.15;">You don't need to manage the team. We do.</h2>
+        <p style="margin-top:22px; color:var(--text-muted); font-size:1.02rem; line-height:1.7; max-width:46ch;">You shouldn't have to become a project manager just because you need digital work done. ZAVERO gives you one point of contact while we handle the specialists behind the project.</p>
+        <p class="highlight">One conversation. One team. One managed project.</p>
+      </div>
+      <div class="diff-diagram reveal">
+        <div class="diff-node">Client</div>
+        <div class="diff-connector"></div>
+        <div class="diff-node center">ZAVERO</div>
+        <div class="diff-connector"></div>
+        <div class="diff-node">Specialist network</div>
+        <div class="diff-connector"></div>
+        <div class="diff-node">Final result</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MANAGEMENT PROCESS ================= -->
+  <section class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">How we manage it</p>
+      <h2>Four steps. One managed process.</h2>
+    </div>
+    <div class="mgmt-steps reveal">
+      <div class="mgmt-step">
+        <span class="step-num">01</span>
+        <h4>We understand</h4>
+        <p>We turn your idea, problem, or requirement into a clear project scope.</p>
+      </div>
+      <div class="mgmt-step">
+        <span class="step-num">02</span>
+        <h4>We match</h4>
+        <p>We connect your project with the specialists whose skills best fit the work.</p>
+      </div>
+      <div class="mgmt-step">
+        <span class="step-num">03</span>
+        <h4>We manage</h4>
+        <p>We coordinate communication, timelines, revisions, and execution so you don't have to.</p>
+      </div>
+      <div class="mgmt-step">
+        <span class="step-num">04</span>
+        <h4>We deliver</h4>
+        <p>You receive the completed work through one reliable point of contact.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section id="how-it-works" class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">The process</p>
+      <h2>From idea to delivery.</h2>
+    </div>
+    <div class="timeline reveal" id="timeline">
+      <div class="timeline-fill" id="timelineFill"></div>
+      <div class="timeline-step" data-step>
+        <div class="timeline-dot">01</div>
+        <h4>Tell us what you need</h4>
+        <p>Share your idea, business requirement, problem, or project.</p>
+      </div>
+      <div class="timeline-step" data-step>
+        <div class="timeline-dot">02</div>
+        <h4>Let's talk</h4>
+        <p>We discuss your goals, scope, timeline, and expectations.</p>
+      </div>
+      <div class="timeline-step" data-step>
+        <div class="timeline-dot">03</div>
+        <h4>We build your team</h4>
+        <p>We select the right specialists from our network for your project.</p>
+      </div>
+      <div class="timeline-step" data-step>
+        <div class="timeline-dot">04</div>
+        <h4>We manage the work</h4>
+        <p>ZAVERO coordinates the project from execution through revisions.</p>
+      </div>
+      <div class="timeline-step" data-step>
+        <div class="timeline-dot">05</div>
+        <h4>You get the result</h4>
+        <p>The finished project reaches you through one managed process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ZAVERO ================= -->
+  <section id="process" class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Why ZAVERO</p>
+      <h2>Built around your needs.</h2>
+    </div>
+    <div class="benefits-grid reveal">
+      <div class="benefit">
+        <h4>One point of contact</h4>
+        <p>No need to coordinate multiple specialists yourself.</p>
+      </div>
+      <div class="benefit">
+        <h4>Flexible expertise</h4>
+        <p>Access different skill sets depending on what your project actually needs.</p>
+      </div>
+      <div class="benefit">
+        <h4>Managed execution</h4>
+        <p>We coordinate the people, communication, and moving parts behind the project.</p>
+      </div>
+      <div class="benefit">
+        <h4>Scalable solutions</h4>
+        <p>Start with one requirement or bring us a larger digital project.</p>
+      </div>
+      <div class="benefit">
+        <h4>Clear communication</h4>
+        <p>A straightforward process designed to keep you informed.</p>
+      </div>
+      <div class="benefit">
+        <h4>Quality-focused</h4>
+        <p>We focus on matching the right expertise to the right problem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHO WE WORK WITH ================= -->
+  <section class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Who we work with</p>
+      <h2>Built for businesses at every stage.</h2>
+    </div>
+    <div class="audience-grid reveal">
+      <div class="audience-card">
+        <h4>Startups</h4>
+        <p>Turn an idea into a real digital product.</p>
+      </div>
+      <div class="audience-card">
+        <h4>Small businesses</h4>
+        <p>Build a stronger digital presence without building an entire in-house team.</p>
+      </div>
+      <div class="audience-card">
+        <h4>E-commerce brands</h4>
+        <p>Create, improve, and grow digital storefronts and experiences.</p>
+      </div>
+      <div class="audience-card">
+        <h4>Growing companies</h4>
+        <p>Bring additional digital expertise into projects when your existing team needs it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="wrap">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="eyebrow">About ZAVERO</p>
+        <h2 style="margin-top:18px; font-size:clamp(1.8rem,3.2vw,2.4rem); font-weight:800; letter-spacing:-0.015em; line-height:1.15;">We're building a better way to get digital work done.</h2>
+        <div style="margin-top:24px;">
+          <p>ZAVERO was created around a simple idea: businesses shouldn't have to navigate the complexity of finding, hiring, and managing different digital specialists for every project.</p>
+          <p>We bring together specialists across development, design, marketing, content, and other digital disciplines — then build the right team around each project.</p>
+          <p>We're starting small, building carefully, and earning trust one project at a time.</p>
+        </div>
+        <p class="about-note">Our work is just getting started.</p>
+      </div>
+      <div class="reveal">
+        <p class="about-mark">Idea <span class="sep">→</span> Team <span class="sep">→</span> Execution <span class="sep">→</span> Result</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section id="contact" class="final-cta wrap">
+    <p class="eyebrow">Have something in mind?</p>
+    <h2>Have an idea? Let's build it.</h2>
+    <p>Tell us what you're working on. We'll figure out what you need, who you need, and how we can help.</p>
+    <a href="#" id="mailtoCta" class="btn-primary">Start a Conversation <span class="arrow" aria-hidden="true">→</span></a>
+    <p class="sub">Let's talk about your next digital project.</p>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">ZAVERO</div>
+        <p class="footer-tagline">Your Vision. Our Network.</p>
+        <p class="footer-desc">A digital agency connecting businesses with the right specialists to turn ideas into finished digital experiences.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how-it-works">Process</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Web Development</a></li>
+          <li><a href="#services">E-Commerce</a></li>
+          <li><a href="#services">UI/UX Design</a></li>
+          <li><a href="#services">Branding</a></li>
+          <li><a href="#services">Mobile Development</a></li>
+          <li><a href="#services">Digital Marketing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="mailto:hello@zavero.com" id="footerEmail">hello@zavero.com</a></li>
+          <li><a href="#" id="linkedinLink">LinkedIn</a></li>
+          <li><a href="#" id="instagramLink">Instagram</a></li>
+          <li><a href="#" id="facebookLink">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ZAVERO. All rights reserved.</span>
+      <span>Built with intention.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Site config — edit brand details here ---------------- */
+  var siteConfig = {
+    name: "ZAVERO",
+    email: "hello@zavero.com",
+    tagline: "Your Vision. Our Network.",
+    linkedin: "#",
+    instagram: "#",
+    facebook: "#"
+  };
+
+  document.getElementById("mailtoCta").href = "mailto:" + siteConfig.email + "?subject=Project%20Inquiry";
+  document.getElementById("footerEmail").href = "mailto:" + siteConfig.email;
+  document.getElementById("footerEmail").textContent = siteConfig.email;
+  document.getElementById("linkedinLink").href = siteConfig.linkedin;
+  document.getElementById("instagramLink").href = siteConfig.instagram;
+  document.getElementById("facebookLink").href = siteConfig.facebook;
+
+  /* ---------------- Header scroll state ---------------- */
+  var header = document.getElementById("siteHeader");
+  function onScroll(){
+    if(window.scrollY > 12){ header.classList.add("scrolled"); }
+    else{ header.classList.remove("scrolled"); }
+  }
+  document.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+
+  /* ---------------- Mobile menu ---------------- */
+  var burger = document.getElementById("navBurger");
+  var menu = document.getElementById("mobileMenu");
+  var scrim = document.getElementById("scrim");
+
+  function closeMenu(){
+    burger.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+    menu.classList.remove("open");
+    scrim.classList.remove("open");
+  }
+  function toggleMenu(){
+    var isOpen = menu.classList.toggle("open");
+    burger.classList.toggle("open", isOpen);
+    burger.setAttribute("aria-expanded", String(isOpen));
+    scrim.classList.toggle("open", isOpen);
+  }
+  burger.addEventListener("click", toggleMenu);
+  scrim.addEventListener("click", closeMenu);
+  menu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMenu); });
+
+  /* ---------------- Scroll reveal ---------------- */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealEls = document.querySelectorAll(".reveal");
+  if(reduceMotion){
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  } else if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ---------------- Process timeline progress ---------------- */
+  var timeline = document.getElementById("timeline");
+  var timelineFill = document.getElementById("timelineFill");
+  var steps = timeline ? timeline.querySelectorAll("[data-step]") : [];
+
+  function updateTimeline(){
+    if(!timeline) return;
+    var rect = timeline.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var progress = (vh * 0.8 - rect.top) / rect.height;
+    progress = Math.max(0, Math.min(1, progress));
+
+    var isVertical = window.innerWidth <= 860;
+    if(isVertical){ timelineFill.style.height = (progress * 100) + "%"; timelineFill.style.width = "1px"; }
+    else{ timelineFill.style.width = (progress * 100) + "%"; timelineFill.style.height = "1px"; }
+
+    var activeCount = Math.round(progress * steps.length);
+    steps.forEach(function(step, i){
+      step.classList.toggle("active", i < activeCount);
+    });
+  }
+  document.addEventListener("scroll", updateTimeline, { passive:true });
+  window.addEventListener("resize", updateTimeline);
+  updateTimeline();
+
+  /* ---------------- Hero network diagram ---------------- */
+  (function buildNetwork(){
+    var linesG = document.getElementById("networkLines");
+    var nodesG = document.getElementById("networkNodes");
+    if(!linesG || !nodesG) return;
+
+    var center = { x:240, y:230 };
+    var labels = ["WEB","DESIGN","MOBILE","MARKETING","ECOMMERCE","VIDEO"];
+    var radius = 175;
+    var count = labels.length;
+
+    labels.forEach(function(label, i){
+      var angle = (Math.PI * 2 * i / count) - Math.PI / 2;
+      var x = center.x + radius * Math.cos(angle);
+      var y = center.y + radius * Math.sin(angle) * 0.82;
+
+      var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", center.x); line.setAttribute("y1", center.y);
+      line.setAttribute("x2", x); line.setAttribute("y2", y);
+      line.setAttribute("stroke-dasharray", "4 5");
+      linesG.appendChild(line);
+
+      var node = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      node.setAttribute("cx", x); node.setAttribute("cy", y);
+      node.setAttribute("r", "4");
+      node.setAttribute("fill", "#8B5CF6");
+      nodesG.appendChild(node);
+
+      var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", x);
+      text.setAttribute("y", y + (y > center.y ? 20 : -12));
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("font-family", "Manrope, sans-serif");
+      text.setAttribute("font-size", "10.5");
+      text.setAttribute("font-weight", "700");
+      text.setAttribute("letter-spacing", "0.06em");
+      text.setAttribute("fill", "#98989E");
+      text.textContent = label;
+      nodesG.appendChild(text);
+
+      if(!reduceMotion){
+        var animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+        animate.setAttribute("attributeName", "stroke-dashoffset");
+        animate.setAttribute("from", "18");
+        animate.setAttribute("to", "0");
+        animate.setAttribute("dur", "1.6s");
+        animate.setAttribute("repeatCount", "indefinite");
+        line.appendChild(animate);
+      }
+    });
+  })();
+
+  /* ---------------- Custom cursor (desktop) ---------------- */
+  var cursorDot = document.getElementById("cursorDot");
+  var isTouch = window.matchMedia("(pointer: coarse)").matches;
+  if(cursorDot && !isTouch && !reduceMotion){
+    document.addEventListener("mousemove", function(e){
+      cursorDot.style.opacity = "1";
+      cursorDot.style.left = e.clientX + "px";
+      cursorDot.style.top = e.clientY + "px";
+    });
+    var hoverTargets = document.querySelectorAll("a, button, .service-row");
+    hoverTargets.forEach(function(el){
+      el.addEventListener("mouseenter", function(){ cursorDot.classList.add("hover"); });
+      el.addEventListener("mouseleave", function(){ cursorDot.classList.remove("hover"); });
+    });
+  } else if(cursorDot){
+    cursorDot.style.display = "none";
+  }
+
+})();
+</script>
+
+</body>
+</html>
